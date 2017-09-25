@@ -1,10 +1,10 @@
 import React from 'react';
-import {Text, StyleSheet, View, FlatList} from 'react-native';
+import { Text, StyleSheet, View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Answer from './Answer';
 
-const Question = ({question, onAnswerSelect}) => {
+const Question = ({ question, onAnswerSelect }) => {
     const onAnswerSelectWithQuestion = (answer) => {
         return onAnswerSelect({
             answer,
@@ -18,7 +18,12 @@ const Question = ({question, onAnswerSelect}) => {
             <FlatList
                 data={question.answers}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => <Answer answer={item} onAnswerSelect={onAnswerSelectWithQuestion}/>}
+                renderItem={({ item }) => (
+                    <Answer
+                        answer={item}
+                        onAnswerSelect={onAnswerSelectWithQuestion}
+                        selected={question.selectedAnswer === item.id}
+                    />)}
             />
         </View>
     );

@@ -45,13 +45,7 @@ const questionsReducer = (state = initialState.questions, {payload, type}) => {
             ...state,
             [payload.question.id]: {
                 ...payload.question,
-                answers: {
-                    ...state[payload.question.id].answers,
-                    [payload.answer.id]: {
-                        ...payload.answer,
-                        selected: true
-                    }
-                }
+                selectedAnswer: payload.answer.id
             }
         };
     }
