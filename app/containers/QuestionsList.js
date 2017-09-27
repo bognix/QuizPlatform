@@ -5,10 +5,10 @@ import {selectAnswer, submitQuiz} from '../actions';
 
 
 const mapStateToProps = (state) => {
-    const {questions} = state;
+    console.log('QuestionsList called');
 
     return {
-        questions: Object.values(questions)
+        questions: Object.values(state.questions)
     };
 };
 
@@ -21,5 +21,9 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const QuestionsList = connect(mapStateToProps, mapDispatchToProps)(QuestionsListComponent);
+
+QuestionsList.navigationOptions = {
+    title: 'Home Screen',
+};
 
 export default QuestionsList;

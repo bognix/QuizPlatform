@@ -1,5 +1,7 @@
-import {combineReducers} from 'redux';
-import {QUESTION_SELECT_ANSWER, QUIZ_SUBMIT} from './consts';
+import { combineReducers } from 'redux';
+import { ACTIONS, SCREENS } from './consts';
+import { NavigationActions } from 'react-navigation';
+import { AppNavigator } from './navigators';
 
 const initialState = {
     questions: {
@@ -39,9 +41,9 @@ const initialState = {
     results: []
 };
 
-const questionsReducer = (state = initialState.questions, {payload, type}) => {
-    switch(type) {
-    case QUESTION_SELECT_ANSWER:
+const questionsReducer = (state = initialState.questions, { payload, type }) => {
+    switch (type) {
+    case ACTIONS.QUESTION_SELECT_ANSWER:
         return {
             ...state,
             [payload.question.id]: {
@@ -54,9 +56,9 @@ const questionsReducer = (state = initialState.questions, {payload, type}) => {
     return state;
 };
 
-const resultsReducer = (state = initialState.results, {payload, type}) => {
-    switch(type) {
-    case QUIZ_SUBMIT:
+const resultsReducer = (state = initialState.results, { payload, type }) => {
+    switch (type) {
+    case ACTIONS.QUIZ_SUBMIT:
         return [
             ...state,
             payload.results
@@ -66,7 +68,24 @@ const resultsReducer = (state = initialState.results, {payload, type}) => {
     return state;
 };
 
+
+const firstAction = AppNavigator.router.getActionForPathAndParams('QuestionsList');
+const initialNavState = AppNavigator.router.getStateForAction(firstAction);
+
+function navigationReducer(state = initialNavState, action) {
+    console.log(state, '*****state');
+    console.log(action, '*****action');
+    return {
+        index: 0,
+        routes: [
+            {key: SCREENS.QUESTIONS_LIST,
+            routeName: SCREENS.QUESTIONS_LIST}
+        ]
+    }
+}
+
 export default combineReducers({
     questions: questionsReducer,
-    results: resultsReducer
+    results: resultsReducer,
+    navigation: navigationReducer
 });

@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
 });
 
 QuestionsList.propTypes = {
-    questions: PropTypes.array,
-    submitQuiz: PropTypes.func
+    questions: PropTypes.array.isRequired,
+    submitQuiz: PropTypes.func.isRequired
 };
 
 export default QuestionsList;
