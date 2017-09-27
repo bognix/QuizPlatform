@@ -1,17 +1,24 @@
 import React from 'react';
-import {FlatList, View, StyleSheet} from 'react-native';
+import { FlatList, View, StyleSheet, TouchableHighlight, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Question from './Question';
 
-const QuestionsList = ({questions, ...actions}) => {
+const QuestionsList = ({ questions, submitQuiz, ...actions }) => {
+    const submitQuizWithQuestions = () => {
+        return submitQuiz(questions);
+    };
+
     return (
         <View style={styles.container}>
             <FlatList
                 data={questions}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => <Question key={item.id} question={item} {...actions}/>}
+                renderItem={({ item }) => <Question question={item} {...actions} />}
             />
+            <TouchableHighlight onPress={submitQuizWithQuestions}>
+                <Text>Zakończ</Text>
+            </TouchableHighlight>
         </View>
     );
 };
@@ -24,7 +31,8 @@ const styles = StyleSheet.create({
 });
 
 QuestionsList.propTypes = {
-    questions: PropTypes.array
+    questions: PropTypes.array,
+    submitQuiz: PropTypes.func
 };
 
 export default QuestionsList;

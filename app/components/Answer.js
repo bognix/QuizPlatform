@@ -35,8 +35,9 @@ const styles = StyleSheet.create({
 });
 
 Answer.propTypes = {
-    text: PropTypes.string,
-    selected: PropTypes.bool
+    answer: PropTypes.object.isRequired,
+    selected: PropTypes.bool,
+    onAnswerSelect: PropTypes.func.isRequired,
 };
 
 export default Answer;

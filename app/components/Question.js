@@ -16,14 +16,11 @@ const Question = ({ question, onAnswerSelect }) => {
         <View>
             <Text style={styles.question}>{question.text}</Text>
             <FlatList
-                data={question.answers}
+                data={Object.values(question.answers)}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <Answer
-                        answer={item}
-                        onAnswerSelect={onAnswerSelectWithQuestion}
-                        selected={question.selectedAnswer === item.id}
-                    />)}
+                    <Answer answer={item} onAnswerSelect={onAnswerSelectWithQuestion} selected={question.selectedAnswer === item.id}/>
+                )}
             />
         </View>
     );
@@ -38,9 +35,8 @@ const styles = StyleSheet.create({
 });
 
 Question.propTypes = {
-    id: PropTypes.number,
-    text: PropTypes.string,
-    answers: PropTypes.array
+    question: PropTypes.object.isRequired,
+    onAnswerSelect: PropTypes.func.isRequired
 };
 
 export default Question;

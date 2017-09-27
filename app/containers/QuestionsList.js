@@ -1,26 +1,21 @@
 import {connect} from 'react-redux';
 import QuestionsListComponent from '../components/QuestionsList';
 import {bindActionCreators} from 'redux';
-import {selectAnswer} from '../actions';
+import {selectAnswer, submitQuiz} from '../actions';
 
 
 const mapStateToProps = (state) => {
-    const {questions: rawQuestions} = state;
-    const questions = Object.values(rawQuestions).map((question) => {
-        return {
-            ...question,
-            answers: Object.values(question.answers)
-        };
-    });
+    const {questions} = state;
 
     return {
-        questions
+        questions: Object.values(questions)
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAnswerSelect: bindActionCreators(selectAnswer, dispatch)
+        onAnswerSelect: bindActionCreators(selectAnswer, dispatch),
+        submitQuiz: bindActionCreators(submitQuiz, dispatch)
     };
 };
 

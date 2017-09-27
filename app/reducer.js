@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {QUESTION_SELECT_ANSWER} from './consts';
+import {QUESTION_SELECT_ANSWER, QUIZ_SUBMIT} from './consts';
 
 const initialState = {
     questions: {
@@ -35,7 +35,8 @@ const initialState = {
                 }
             }
         }
-    }
+    },
+    results: []
 };
 
 const questionsReducer = (state = initialState.questions, {payload, type}) => {
@@ -53,6 +54,19 @@ const questionsReducer = (state = initialState.questions, {payload, type}) => {
     return state;
 };
 
+const resultsReducer = (state = initialState.results, {payload, type}) => {
+    switch(type) {
+    case QUIZ_SUBMIT:
+        return [
+            ...state,
+            payload.results
+        ];
+    }
+
+    return state;
+};
+
 export default combineReducers({
     questions: questionsReducer,
+    results: resultsReducer
 });
