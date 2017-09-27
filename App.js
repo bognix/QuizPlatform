@@ -8,27 +8,16 @@ import reducer from './app/reducer';
 import StatefulAppNavigator from './app/navigators';
 
 
-
 const store = createStore(reducer, applyMiddleware(thunk, reduxLogger));
+
+const AppNav = () => <StatefulAppNavigator/>;
 
 export default class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <View style={styles.container}>
-                    <StatefulAppNavigator />
-                    <Text>dupa</Text>
-                </View>
+                <AppNav/>
             </Provider>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});

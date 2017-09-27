@@ -5,8 +5,6 @@ import {selectAnswer, submitQuiz} from '../actions';
 
 
 const mapStateToProps = (state) => {
-    console.log('QuestionsList called');
-
     return {
         questions: Object.values(state.questions)
     };

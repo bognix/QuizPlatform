@@ -26,7 +26,10 @@ const QuestionsList = ({ questions, submitQuiz, ...actions }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 22
+        paddingTop: 22,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
 

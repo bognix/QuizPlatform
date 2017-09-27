@@ -1,9 +1,9 @@
-import {QUESTION_SELECT_ANSWER, QUIZ_SUBMIT} from './consts';
+import {ACTIONS} from './consts';
 
 export const selectAnswer = (payload) => {
     return (dispatch) => {
         return dispatch({
-            type: QUESTION_SELECT_ANSWER,
+            type: ACTIONS.QUESTION_SELECT_ANSWER,
             payload
         });
     };
@@ -12,7 +12,7 @@ export const selectAnswer = (payload) => {
 export const submitQuiz = (payload) => {
     return (dispatch) => {
         return dispatch({
-            type: QUIZ_SUBMIT,
+            type: ACTIONS.QUIZ_SUBMIT,
             payload: calculateResults(payload)
         });
     };
