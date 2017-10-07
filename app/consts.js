@@ -5,5 +5,6 @@ export const ACTIONS = {
 };
 
 export const SCREENS = {
-    QUESTIONS_LIST: 'QuestionsList'
+    QUESTIONS_LIST: 'QuestionsList',
+    RESULTS_LIST: 'ResultsList'
 };

@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 import { SCREENS } from './consts';
 import QuestionsList from './containers/QuestionsList';
+import ResultsList from './containers/ResultsList';
 
 
 export const AppNavigator = StackNavigator({
     [SCREENS.QUESTIONS_LIST]: { screen: QuestionsList },
+    [SCREENS.RESULTS_LIST]: { screen: ResultsList },
 });
 
 const AppWithNavigationState = ({ dispatch, navigation}) => {

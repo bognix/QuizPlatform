@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
 import { ACTIONS, SCREENS } from './consts';
+import { AppNavigator } from './navigators';
+import { NavigationActions } from 'react-navigation';
+
 
 const initialState = {
     questions: {
@@ -36,7 +39,16 @@ const initialState = {
             }
         }
     },
-    results: []
+    results: [],
+    navigation: {
+        index: 0,
+        routes: [
+            {
+                key: SCREENS.QUESTIONS_LIST,
+                routeName: SCREENS.QUESTIONS_LIST
+            }
+        ]
+    }
 };
 
 const questionsReducer = (state = initialState.questions, { payload, type }) => {
@@ -59,7 +71,7 @@ const resultsReducer = (state = initialState.results, { payload, type }) => {
     case ACTIONS.QUIZ_SUBMIT:
         return [
             ...state,
-            payload.results
+            payload
         ];
     }
 
@@ -67,16 +79,20 @@ const resultsReducer = (state = initialState.results, { payload, type }) => {
 };
 
 
-function navigationReducer() {
-    return {
-        index: 0,
-        routes: [
-            {
-                key: SCREENS.QUESTIONS_LIST,
-                routeName: SCREENS.QUESTIONS_LIST
-            }
-        ]
-    };
+function navigationReducer(state = initialState.navigation, action) {
+    let nextState = state;
+    switch (action.type) {
+    case SCREENS.RESULTS_LIST:
+        nextState = AppNavigator.router.getStateForAction(
+            NavigationActions.navigate({ routeName: SCREENS.RESULTS_LIST }),
+            state
+        );
+        break;
+    default:
+        nextState = AppNavigator.router.getStateForAction(action, state);
+    }
+
+    return nextState || state;
 }
 
 export default combineReducers({
