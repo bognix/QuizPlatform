@@ -5,10 +5,6 @@ import PropTypes from 'prop-types';
 import Question from './Question';
 
 const QuestionsList = ({ questions, submitQuiz, ...actions }) => {
-    const submitQuizWithQuestions = () => {
-        return submitQuiz(questions);
-    };
-
     return (
         <View style={styles.container}>
             <FlatList
@@ -16,7 +12,7 @@ const QuestionsList = ({ questions, submitQuiz, ...actions }) => {
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => <Question question={item} {...actions} />}
             />
-            <TouchableHighlight onPress={submitQuizWithQuestions}>
+            <TouchableHighlight onPress={submitQuiz}>
                 <Text>Zakończ</Text>
             </TouchableHighlight>
         </View>

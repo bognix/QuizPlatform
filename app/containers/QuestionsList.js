@@ -2,6 +2,7 @@ import {connect} from 'react-redux';
 import QuestionsListComponent from '../components/QuestionsList';
 import {bindActionCreators} from 'redux';
 import {selectAnswer, submitQuiz} from '../actions';
+import { SCREENS } from '../consts';
 
 
 const mapStateToProps = (state) => {
@@ -17,11 +18,23 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    return {
+        ...ownProps,
+        ...stateProps,
+        ...dispatchProps,
+        submitQuiz: () => {
+            ownProps.navigation.dispatch({type: SCREENS.RESULTS_LIST});
+            return dispatchProps.submitQuiz(stateProps.questions);
+        }
+    };
+};
 
-const QuestionsList = connect(mapStateToProps, mapDispatchToProps)(QuestionsListComponent);
+
+const QuestionsList = connect(mapStateToProps, mapDispatchToProps, mergeProps)(QuestionsListComponent);
 
 QuestionsList.navigationOptions = {
-    title: 'Home Screen',
+    title: 'Pytania',
 };
 
 export default QuestionsList;
